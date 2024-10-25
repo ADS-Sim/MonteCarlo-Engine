@@ -1,20 +1,28 @@
+# IMPORTS
+import math as m
+
+
 class Pipe:
-    def __init__(self, input_system, output_system, diameter=1, diameter_margin=0.001, length=1, length_margin=0.001):
-        self.diameter = diameter
-        self.diameter_margin = diameter_margin
-        self.length = length
-        self.length_margin = length_margin
+    def __init__(self, input_system, output_system, flow_factor, specific_gravity):
+        self.pressure = 1
+        self.output_pressure = 1
+        self.massflow = 0
 
-        self.input_pressure_table = []
-        self.output_pressure_table = []
+        self.discharge_coefficient = 0.76  # Cd = 0.76
+        self.flow_factor = flow_factor  # Kv = 0
+        self.specific_gravity = specific_gravity
 
-        self.input_system = input_system
-        self.output_system = output_system
+    def run_through(self, content, input_pressure):
+        self.update_pressure(input_pressure)
+        self.massflow_calculation(content)
 
-    def run_through(self, input_pressure):
-        self.input_pressure_table.append(input_pressure)
-        output_pressure = 0
-        # Bernoulli Equation
+    def massflow_calculation(self, content):
+        try:
+            pressure_diff = (self.pressure - self.output_pressure) * pow(10, 5)
+            volume_flow = self.flow_factor * m.sqrt(self.specific_gravity / pressure_diff)
+            self.massflow = content.density * volume_flow
+        except Exception as e:
+            print(f"In Pipe : massflow_calculation : {e}")
 
-        self.output_pressure_table.append(output_pressure)
-        return output_pressure
+    def update_pressure(self, input_pressure):
+        self.pressure = input_pressure

@@ -7,8 +7,8 @@ def main():
     print(f"MONTE CARLO SIMULATION - ENGINE")
     sim = Simulation.Simulation()
     sim.run()
-    display = Display.Display(sim)
-    display.display()
+    # display = Display.Display(sim)
+    # display.display()
 
 
 if __name__ == '__main__':
