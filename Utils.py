@@ -5,7 +5,7 @@ import math as m
 class Utils:
     def __init__(self):
         # Oxidizer Fuel Ratio
-        self.file_path_of_ratio = 'rocket_cea_data_h2o2_c3h8.xlsx'
+        self.file_path_of_ratio = 'data_of_ratio.xlsx'
         self.sheet_name_of_ratio = 'CEA analysis'
         self.of_ratio_dataframe = None
 
